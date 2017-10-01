@@ -4,10 +4,12 @@ import {
 } from 'rebass'
 import EmasciiList from './EmasciiList';
 import Header from './Header';
-import './App.css';
 
 import styled from 'styled-components';
 
+const Centered = styled.div`
+  text-align: center;
+`;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +26,10 @@ class App extends Component {
 
     return (
       <Provider>
-        <div className="App">
+        <Centered>
           <Header onChange={this.onChange} />
           <EmasciiList search={search} />
-        </div>
+        </Centered>
       </Provider>
     );
   }
