@@ -7,7 +7,7 @@ import {
 import styled, { keyframes } from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-const animationDuration = 1;
+const animationDuration = 0.5;
 
 const Panel = styled.div`
   margin-top: 60px;
@@ -15,7 +15,7 @@ const Panel = styled.div`
 `;
 
 const colorChange = keyframes`
-  from { color: lime; }
+  from { color: white; }
   to { color: #333; }
 `;
 
@@ -26,6 +26,10 @@ const Heading = styled.span`
   font-size: 2em;
   border-radius: 20px;
   font-family: "Arial", sans-serif;
+  &:hover {
+    background-color: PALEGREEN;
+    color: black;
+  }
   ${props => props.copied ? `
     animation: ${colorChange} ${animationDuration}s;
   ` : null}
