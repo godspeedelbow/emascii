@@ -19,7 +19,6 @@ class SearchInput extends Component{
     super(props);
   }
   componentDidMount(){
-    console.log(this.inputComponent)
     this.inputComponent.focus();
   }
   render() {
@@ -29,7 +28,7 @@ class SearchInput extends Component{
           <Input autoCapitalize="none"
             placeholder={'search'}
             onChange={(event) => this.props.onChange(event.target.value)}
-            innerRef={(input) => {console.log('ref', input); this.inputComponent = input;}}
+            innerRef={(input) => { this.inputComponent = input; }}
           />
     	   </Box>
       </Flex>
