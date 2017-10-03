@@ -12,7 +12,8 @@ const Centered = styled.div`
 `;
 
 const Footer = styled.div`
-  margin-top: 100px;
+  margin-top: 80px;
+  margin-bottom: 40px;
   color: #aaa;
 `;
 
