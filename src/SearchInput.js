@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 
-import {
-  Box,
-  Flex,
-} from 'rebass'
-
 import styled from 'styled-components';
 
 const Input = styled.input`
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #999;
+  color: #444;
   font-size: 2em;
-outline: none;
+  outline: none;
+  width: 90%;
 `;
 
 class SearchInput extends Component{
@@ -23,15 +20,11 @@ class SearchInput extends Component{
   }
   render() {
     return(
-      <Flex align='center' justify='center'>
-        <Box px={2} py={2} width={1/3}>
-          <Input autoCapitalize="none"
-            placeholder={'search'}
-            onChange={(event) => this.props.onChange(event.target.value)}
-            innerRef={(input) => { this.inputComponent = input; }}
-          />
-    	   </Box>
-      </Flex>
+        <Input autoCapitalize="none"
+          placeholder={'search'}
+          onChange={(event) => this.props.onChange(event.target.value)}
+          innerRef={(input) => { this.inputComponent = input; }}
+        />
     );
   }
 }
