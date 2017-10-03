@@ -2,9 +2,22 @@ import React from 'react';
 
 import SearchInput from './SearchInput'
 
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  margin-bottom: 0;
+  color: #444;
+`;
+const Tagline = styled.h3`
+  color: #999;
+  margin-top: 0;
+  font-weight: normal;
+  color: lawngreen;
+`;
 const Header = ({ onChange }) => (
   <div>
-    <h1 className="App-title">Emasciiiii, hai!</h1>
+    <Title>Emasciiiii, hai!</Title>
+    <Tagline>click to copy to clipboard</Tagline>
     <SearchInput onChange={onChange} />
   </div>
 );

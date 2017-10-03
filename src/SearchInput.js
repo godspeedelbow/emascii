@@ -9,6 +9,7 @@ const Input = styled.input`
   font-size: 2em;
   outline: none;
   width: 90%;
+  max-width: 220px;
 `;
 
 class SearchInput extends Component{

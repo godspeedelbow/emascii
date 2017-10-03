@@ -19,17 +19,19 @@ const colorChange = keyframes`
   to { color: #333; }
 `;
 
+
 const Heading = styled.span`
   background-color: #f3f3f3;
   padding: 20px;
-  magin: 10px;
   font-size: 2em;
   border-radius: 20px;
   font-family: "Arial", sans-serif;
+
   &:hover {
-    background-color: PALEGREEN;
+    background-color: palegreen;
     color: black;
   }
+
   ${props => props.copied ? `
     animation: ${colorChange} ${animationDuration}s;
   ` : null}
@@ -39,18 +41,33 @@ const Name = styled.div`
   margin-top: 20px;
   color: grey;
   font-size: 1.2em;
+
+  ${Panel}:hover & {
+		display: none;
+	}
+`;
+
+const Tip = styled.div`
+  display: none;
+
+  margin-top: 20px;
+  color: lawngreen;
+  font-size: 1.2em;
+
+  ${Panel}:hover & {
+    display: block;
+  }
 `;
 
 const Emascii = ({ name, emascii, copied, onCopy }) => {
+  const tip = copied ? 'copied' : 'click to copy';
+
   return (
     <CopyToClipboard text={emascii} onCopy={onCopy}>
       <Panel>
-        <Heading copied={copied}>
-          {emascii}
-        </Heading>
-        <Name>
-          {name}
-        </Name>
+        <Heading copied={copied}>{emascii}</Heading>
+        <Name>{name}</Name>
+        <Tip>{tip}</Tip>
       </Panel>
     </CopyToClipboard>
   );
