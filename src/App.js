@@ -10,6 +10,21 @@ import styled from 'styled-components';
 const Centered = styled.div`
   text-align: center;
 `;
+
+const Footer = styled.div`
+  margin-top: 100px;
+  color: #aaa;
+`;
+
+const Link = styled.a`
+	color: lawngreen;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,11 +44,15 @@ class App extends Component {
         <Centered>
           <Header onChange={this.onChange} />
           <EmasciiList search={search} />
+          <Footer>created by @godspeedelbow:&nbsp;
+            <Link href="https://github.com/godspeedelbow">github</Link>
+            &nbsp;/&nbsp;
+            <Link href="https://twitter.com/godspeedelbow">twitter</Link>
+          </Footer>
         </Centered>
       </Provider>
     );
   }
 }
-
 
 export default styled(App)``;
