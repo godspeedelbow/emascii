@@ -128,7 +128,6 @@ const emasciis = {
   "endure": "(҂◡_◡) ᕤ",
   "evil": "ψ(｀∇´)ψ",
   "evillenny": "(͠≖ ͜ʖ͠≖)",
-  "facebook": "(╯°□°)╯︵ ʞooqǝɔɐɟ",
   "facepalm": "(－‸ლ)",
   "fart": "(ˆ⺫ˆ๑)<3",
   "fight": "(ง •̀_•́)ง",
