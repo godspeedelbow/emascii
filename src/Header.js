@@ -16,7 +16,7 @@ const Tagline = styled.h3`
 `;
 const Header = ({ onChange }) => (
   <div>
-    <Title>Emasciiiii, hai!</Title>
+    <Title>emasciiiii, hai</Title>
     <Tagline>click to copy to clipboard</Tagline>
     <SearchInput onChange={onChange} />
   </div>
