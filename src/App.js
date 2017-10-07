@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  Provider
-} from 'rebass'
 import EmasciiList from './EmasciiList';
 import Header from './Header';
 
@@ -41,17 +38,15 @@ class App extends Component {
     const { search } = this.state;
 
     return (
-      <Provider>
-        <Centered>
-          <Header onChange={this.onChange} />
-          <EmasciiList search={search} />
-          <Footer>created by @godspeedelbow:&nbsp;
-            <Link href="https://github.com/godspeedelbow">github</Link>
-            &nbsp;/&nbsp;
-            <Link href="https://twitter.com/godspeedelbow">twitter</Link>
-          </Footer>
-        </Centered>
-      </Provider>
+      <Centered>
+        <Header onChange={this.onChange} />
+        <EmasciiList search={search} />
+        <Footer>created by @godspeedelbow:&nbsp;
+          <Link href="https://github.com/godspeedelbow">github</Link>
+          &nbsp;/&nbsp;
+          <Link href="https://twitter.com/godspeedelbow">twitter</Link>
+        </Footer>
+      </Centered>
     );
   }
 }
