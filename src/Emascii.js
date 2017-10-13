@@ -10,7 +10,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 const animationDuration = 0.5;
 
 const Panel = styled.div`
-  margin-top: 60px;
+  margin: 12px 10px;
   cursor: pointer;
 `;
 
@@ -20,7 +20,7 @@ const colorChange = keyframes`
 `;
 
 
-const Heading = styled.span`
+const Heading = styled.div`
   background-color: #f3f3f3;
   padding: 20px;
   font-size: 2em;
