@@ -1,7 +1,7 @@
 {
   "name": "emascii",
   "version": "0.1.0",
-  "homepage": "https://godspeedelbow.github.io/emascii/",
+  "homepage": "http://emascii.com/",
   "private": true,
   "dependencies": {
     "flip-text": "^1.1.0",

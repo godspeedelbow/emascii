@@ -1,3 +1,3 @@
 # Emascii: emojis in ASCII/Unicode
 
-[godspeedelbow.github.io/emascii](https://godspeedelbow.github.io/emascii)
+[emascii.com](http://emascii.com)
