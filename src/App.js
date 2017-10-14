@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
 import EmasciiList from './EmasciiList';
 import Header from './Header';
-
-import styled from 'styled-components';
 
 const Centered = styled.div`
   text-align: center;
