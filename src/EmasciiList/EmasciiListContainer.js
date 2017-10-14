@@ -5,6 +5,7 @@ import EmasciiList from './EmasciiList';
 import flip from 'flip-text';
 
 import { getRelated } from '../utils/datamuse';
+import clean from '../utils/clean-emascii-names';
 
 const emasciiNames = Object.keys(emasciiDict);
 const shuffledEmasciiNames = shuffle(emasciiNames);
@@ -26,10 +27,6 @@ const suggest = text => {
   ];
   return suggestions;
 }
-
-const clean = key => key
-  .replace(/-/g,'')
-  .replace(/\d/g,'')
 
 const mapEmasciisToProps = ({ search, related }) => {
   // create score board of related words
