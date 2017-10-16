@@ -5,7 +5,11 @@ import EmasciiList from './EmasciiList';
 import flip from 'flip-text';
 
 import { getRelated } from '../utils/datamuse';
-import clean from '../utils/clean-emascii-names';
+
+const clean = name => name
+  .replace(/-/g,' ')
+  .replace(/\d/g,'')
+  .trim();
 
 const emasciiNames = Object.keys(emasciiDict);
 const shuffledEmasciiNames = shuffle(emasciiNames);
