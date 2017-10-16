@@ -16,7 +16,3 @@ const get = (query) => {
 };
 
 export const getRelated = text => get(`words?${stringify({ ml: text })}`);
-export const getSuggestion = text => {
-  return get(`sug?${stringify({ s: text })}`)
-    .then(suggestions => suggestions[0] || '');
-};
