@@ -12,6 +12,7 @@ const stringify = (options) => {
 const get = (query) => {
   return fetch(`https://api.datamuse.com/${query}`, {
     json: true,
+    mode: 'cors',
   }).then(response => response.json());
 };
 
