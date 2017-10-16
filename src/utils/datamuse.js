@@ -13,6 +13,9 @@ const get = (query) => {
   return fetch(`https://api.datamuse.com/${query}`, {
     json: true,
     mode: 'cors',
+    header: {
+      'Access-Control-Allow-Origin':'*',
+    },
   }).then(response => response.json());
 };
 
