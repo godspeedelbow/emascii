@@ -1,4 +1,4 @@
-import { compose, withState, withProps, withPropsOnChange } from 'recompose';
+import { compose, withStateHandlers, withProps, withPropsOnChange } from 'recompose';
 import emasciiDict from '../data/emasciis';
 import shuffle from 'lodash/shuffle';
 import EmasciiList from './EmasciiList';
@@ -9,6 +9,12 @@ import clean from '../utils/clean-emascii-names';
 
 const emasciiNames = Object.keys(emasciiDict);
 const shuffledEmasciiNames = shuffle(emasciiNames);
+
+const nameToEmascii = name => ({
+  name: name,
+  emascii: emasciiDict[name],
+});
+
 const suggest = text => {
   const flipped = flip(text);
   const suggestions = [
@@ -28,67 +34,74 @@ const suggest = text => {
   return suggestions;
 }
 
-const mapEmasciisToProps = ({ search, related }) => {
-  // create score board of related words
-  // exact match (search) has highest score
-  const highestScore = related.length ? related[0].score + 1 : 1;
-  const exactMatch = { word: search, score: highestScore };
-  const scoreLookup = [
-    ...related,
-    exactMatch, // inject exact match
-  ].reduce((agg, { word, score }) => ({
+const mapEmasciisToProps = ({ search, relatedWords }) => {
+  if (!search) {
+    return {
+      matched: shuffledEmasciiNames.map(nameToEmascii),
+      related: [],
+      suggested: [],
+    };
+  }
+
+  // create list of emasciis that match search
+  const matched = shuffledEmasciiNames
+    // filter emasciis that match search
+    .filter(name => name.match(search))
+    .sort();
+
+  // create score by word lookup of related words
+  const scoreByWord = relatedWords.reduce((agg, { word, score }) => ({
     ...agg,
     [word]: score,
   }), {});
 
-  // filter emasciis that match search or related words
-  const filtered = shuffledEmasciiNames.filter(key => {
-    if (!search) {
-      return true;
-    }
-    const cleanKey = clean(key);
+  const related = shuffledEmasciiNames
+    // filter emasciis that match related words
+    .filter(name => scoreByWord[clean(name)])
 
-    if (scoreLookup[cleanKey]) return true;
-    if (key.match(search)) return true;
-    return false;
-  });
+    // remove emasciis that are in matched
+    .filter(name => !matched.includes(name))
 
-  // sort on word distance
-  const sorted = !search ? filtered : filtered.sort((a, b) => {
-    const cleanA = clean(a);
-    const cleanB = clean(b);
+    // sort on word distance
+    .sort((a, b) => {
+      const scoreA = scoreByWord[clean(a)] || 0;
+      const scoreB = scoreByWord[clean(b)] || 0;
 
-    const scoreA = scoreLookup[cleanA] || 0;
-    const scoreB = scoreLookup[cleanB] || 0;
-
-    return scoreB - scoreA;
-  });
-
-  // map the emasciis
-  const mapped = sorted.map(name => ({
-    name: name,
-    emascii: emasciiDict[name],
-  }));
-
-  // add table flipping suggestions
-  const withSuggestions = [
-    ...mapped,
-    ...suggest(search),
-  ];
+      return scoreB - scoreA;
+    });
 
   return {
-    emasciis: withSuggestions,
+    matched: matched.map(nameToEmascii),
+    related: related.map(nameToEmascii),
+    suggested: suggest(search),
   };
 };
 
-const EmasciiListContainer = compose(
-  withState('related', 'setRelated', []),
-  withPropsOnChange(['search'], ({ search, setRelated }) => {
-    if (!search) {
-      return setRelated([]);
-    }
-    getRelated(search).then(setRelated);
+const withRelatedWords = compose(
+  withStateHandlers({
+    relatedBySearch: {},
+  }, {
+    setRelatedBySearch: ({ relatedBySearch }) => (search, relatedWords) => ({
+      relatedBySearch: {
+        ...relatedBySearch,
+        [search]: relatedWords,
+      },
+    }),
   }),
+  withPropsOnChange(['search'], ({ search, relatedBySearch, setRelatedBySearch }) => {
+    if (!search || relatedBySearch[search]) {
+      return; // no need to fetch
+    }
+    getRelated(search)
+      .then(relatedWords => setRelatedBySearch(search, relatedWords));
+  }),
+  withProps(({ relatedBySearch, search }) => ({
+    relatedWords: relatedBySearch[search] || [],
+  })),
+);
+
+const EmasciiListContainer = compose(
+  withRelatedWords,
   withProps(mapEmasciisToProps),
 )(EmasciiList);
 
