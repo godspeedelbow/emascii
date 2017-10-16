@@ -9,7 +9,6 @@
     "lodash": "^4.17.4",
     "react": "^16.0.0",
     "react-app-rewire-styled-components": "^3.0.0",
-    "react-autosuggest": "^9.3.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
