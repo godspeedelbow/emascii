@@ -5,6 +5,7 @@ import EmasciiList from './EmasciiList';
 import flip from 'flip-text';
 
 import { getRelated } from '../utils/datamuse';
+import escapeRegEx from '../utils/escape-regex';
 
 const clean = name => name
   .replace(/-/g,' ')
@@ -46,11 +47,11 @@ const mapEmasciisToProps = ({ search, relatedWords }) => {
       suggested: [],
     };
   }
-
+  const cleanSearch = escapeRegEx(search);
   // create list of emasciis that match search
   const matched = shuffledEmasciiNames
     // filter emasciis that match search
-    .filter(name => name.match(search))
+    .filter(name => name.match(cleanSearch))
     .sort();
 
   // create score by word lookup of related words
