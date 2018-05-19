@@ -59,12 +59,31 @@ const Tip = styled.div`
   }
 `;
 
-const Emascii = ({ name, emascii, copied, onCopy }) => {
+const Count = styled.span`
+  background-color: palegreen;
+  float: right;
+  position: absolute;
+  width: 30px;
+  height: 24px;
+  padding-top: 6px;
+  text-overflow: none;
+  border-radius: 15px;
+  font-size: 0.9em;
+  font-weight: bold;
+
+  ${Panel}:hover & {
+    background-color: black;
+    color: white;
+  }
+`;
+
+const Emascii = ({ name, emascii, copied, copyCount, onCopy }) => {
   const tip = copied ? 'copied' : 'click to copy';
 
   return (
     <CopyToClipboard text={emascii} onCopy={onCopy}>
       <Panel>
+        {!!copyCount && <Count>{copyCount}</Count>}
         <Heading copied={copied}>{emascii}</Heading>
         <Name>{name}</Name>
         <Tip>{tip}</Tip>
@@ -75,9 +94,11 @@ const Emascii = ({ name, emascii, copied, onCopy }) => {
 
 const EmasciiContainer = compose(
   withState('copied', 'setCopied', false),
+  withState('copyCount', 'setCopyCount', 0),
   withHandlers({
-    onCopy: ({ setCopied }) => () => {
+    onCopy: ({ setCopied, copyCount, setCopyCount }) => () => {
       setCopied(true);
+      setCopyCount(copyCount + 1);
       setTimeout(
         () => setCopied(false),
         animationDuration * 1000
