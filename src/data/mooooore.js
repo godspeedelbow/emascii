@@ -1165,41 +1165,6 @@ const a = {
         words: ["why"],
         ascii: "ლ(`◉◞౪◟◉‵ლ)"
     },
-    witchtext: {
-        words: ["witchtext"],
-        ascii: function(a) {
-            a = a || "when shall we three meet again?";
-            var b = {
-                a: "Λ",
-                b: "ß",
-                c: "¢",
-                d: "Ð",
-                e: "Σ",
-                f: "Ŧ",
-                g: "G",
-                h: "H",
-                i: "|",
-                j: "⅃",
-                k: "Ҡ",
-                l: "L",
-                m: "M",
-                n: "И",
-                o: "Ө",
-                p: "þ",
-                q: "Q",
-                r: "Я",
-                s: "$",
-                t: "†",
-                u: "V",
-                v: "V",
-                w: "W",
-                x: "X",
-                y: "Ұ",
-                z: "Z"
-            };
-            return e(a.toLowerCase(), b)
-        }
-    },
     woo: {
         words: ["woo"],
         ascii: "＼(＾O＾)／"
