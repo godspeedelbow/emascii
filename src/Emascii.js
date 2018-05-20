@@ -9,10 +9,13 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const animationDuration = 0.5;
 
+const Wrapper = styled.div`
+  position: relative;
+`;
+
 const Panel = styled.div`
   margin: 12px 10px;
   cursor: pointer;
-  position: relative;
 `;
 
 const colorChange = keyframes`
@@ -28,7 +31,7 @@ const Heading = styled.div`
   border-radius: 20px;
   font-family: "Arial", sans-serif;
 
-  &:hover {
+  ${Panel}:hover & {
     background-color: palegreen;
     color: black;
   }
@@ -63,8 +66,8 @@ const Tip = styled.div`
 const CopyCount = styled.span`
   background-color: palegreen;
   position: absolute;
-  top: -15px;
-  right: -13px;
+  top: 0;
+  right: 0;
   z-index: 2;
   width: 30px;
   height: 24px;
@@ -73,8 +76,9 @@ const CopyCount = styled.span`
   border-radius: 15px;
   font-size: 0.9em;
   font-weight: bold;
+  cursor: pointer;
 
-  ${Panel}:hover & {
+  ${Wrapper}:hover & {
     background-color: black;
     color: white;
   }
@@ -89,28 +93,35 @@ const Counted = styled.span`
 
 const Clear = styled.span`
   display: none;
+  font-weight: 100;
+  font-size: 19px;
+  line-height: 13px;
   ${CopyCount}:hover & {
     display: block;
   }
 `;
 
 
-const Emascii = ({ name, emascii, copied, copyCount = 1, onCopy }) => {
+const Emascii = ({ name, emascii, copied, copyCount, setCopyCount, onCopy }) => {
   const tip = copied ? 'copied' : 'click to copy';
 
   return (
+    <Wrapper>
+        {!!copyCount && (
+          <CopyCount>
+            <Counted>{copyCount}</Counted>
+            <Clear onClick={() => setCopyCount(0)}>×</Clear>
+          </CopyCount>
+        )}
     <CopyToClipboard text={emascii} onCopy={onCopy}>
-      <Panel>
-        {!!copyCount && <CopyCount>
-          <Counted>{copyCount}</Counted>
-          <Clear>x</Clear>
-        </CopyCount>}
-        <Heading copied={copied}>{emascii}</Heading>
-        <Name>{name}</Name>
-        <Tip>{tip}</Tip>
-      </Panel>
+        <Panel>
+          <Heading copied={copied}>{emascii}</Heading>
+          <Name>{name}</Name>
+          <Tip>{tip}</Tip>
+        </Panel>
     </CopyToClipboard>
-  );
+      </Wrapper>
+    );
 };
 
 const EmasciiContainer = compose(
