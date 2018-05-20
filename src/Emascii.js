@@ -12,6 +12,7 @@ const animationDuration = 0.5;
 const Panel = styled.div`
   margin: 12px 10px;
   cursor: pointer;
+  position: relative;
 `;
 
 const colorChange = keyframes`
@@ -59,10 +60,12 @@ const Tip = styled.div`
   }
 `;
 
-const Count = styled.span`
+const CopyCount = styled.span`
   background-color: palegreen;
-  float: right;
   position: absolute;
+  top: -15px;
+  right: -13px;
+  z-index: 2;
   width: 30px;
   height: 24px;
   padding-top: 6px;
@@ -77,13 +80,31 @@ const Count = styled.span`
   }
 `;
 
-const Emascii = ({ name, emascii, copied, copyCount, onCopy }) => {
+const Counted = styled.span`
+  display: block;
+  ${CopyCount}:hover & {
+    display: none;
+  }
+`;
+
+const Clear = styled.span`
+  display: none;
+  ${CopyCount}:hover & {
+    display: block;
+  }
+`;
+
+
+const Emascii = ({ name, emascii, copied, copyCount = 1, onCopy }) => {
   const tip = copied ? 'copied' : 'click to copy';
 
   return (
     <CopyToClipboard text={emascii} onCopy={onCopy}>
       <Panel>
-        {!!copyCount && <Count>{copyCount}</Count>}
+        {!!copyCount && <CopyCount>
+          <Counted>{copyCount}</Counted>
+          <Clear>x</Clear>
+        </CopyCount>}
         <Heading copied={copied}>{emascii}</Heading>
         <Name>{name}</Name>
         <Tip>{tip}</Tip>
