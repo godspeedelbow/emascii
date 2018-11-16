@@ -3,9 +3,11 @@ import {
   compose,
   withState,
   withHandlers,
+  withStateHandlers,
 } from 'recompose';
 import styled, { keyframes } from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import {setFavorite, getFavorite, removeFavorite} from './utils/favorites-storage';
 
 const animationDuration = 0.5;
 
@@ -102,7 +104,7 @@ const Clear = styled.span`
 `;
 
 
-const Emascii = ({ name, emascii, copied, copyCount, setCopyCount, onCopy }) => {
+const Emascii = ({ name, emascii, copied, copyCount, removeCopyCount, onCopy }) => {
   const tip = copied ? 'copied' : 'click to copy';
 
   return (
@@ -110,7 +112,7 @@ const Emascii = ({ name, emascii, copied, copyCount, setCopyCount, onCopy }) => 
         {!!copyCount && (
           <CopyCount>
             <Counted>{copyCount}</Counted>
-            <Clear onClick={() => setCopyCount(0)}>×</Clear>
+            <Clear onClick={removeCopyCount}>×</Clear>
           </CopyCount>
         )}
     <CopyToClipboard text={emascii} onCopy={onCopy}>
@@ -125,12 +127,21 @@ const Emascii = ({ name, emascii, copied, copyCount, setCopyCount, onCopy }) => 
 };
 
 const EmasciiContainer = compose(
+  withStateHandlers(
+    ({ name }) => ({
+        copyCount: getFavorite(name),
+    }),
+    {
+      increaseCopyCount: (_, { name }) => () => ({copyCount: setFavorite(name)}),
+      removeCopyCount: (_, { name }) => () => ({copyCount: removeFavorite(name)}),
+    },
+  ),
   withState('copied', 'setCopied', false),
-  withState('copyCount', 'setCopyCount', 0),
   withHandlers({
-    onCopy: ({ setCopied, copyCount, setCopyCount }) => () => {
+    onCopy: ({ setCopied, increaseCopyCount }) => () => {
       setCopied(true);
-      setCopyCount(copyCount + 1);
+      increaseCopyCount();
+
       setTimeout(
         () => setCopied(false),
         animationDuration * 1000
