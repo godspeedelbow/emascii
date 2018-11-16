@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 const Panel = styled.div`
   margin: 12px 10px;
   cursor: pointer;
+  min-width: 110px; // to make sure "click to copy" doesn't shift emasciis
 `;
 
 const colorChange = keyframes`
