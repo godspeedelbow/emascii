@@ -8,12 +8,14 @@ import {
   getRelatedWordsMatches
 } from "../utils/match";
 import suggest from "../utils/suggest";
+import {getFavorite} from '../utils/favorites-storage';
 
 import EmasciiList from "./EmasciiList";
 
 const EmasciiListContainer = compose(
   withRelatedWords(),
   withProps(mapEmasciisToProps),
+  withProps(mapFavoritesToTop)
 )(EmasciiList);
 
 export default EmasciiListContainer;
@@ -65,4 +67,20 @@ function withRelatedWords() {
       relatedWords: relatedBySearch[search] || [],
     })),
   );
+}
+
+function mapFavoritesToTop({
+  matched = [],
+  related = [],
+  suggested = [],
+}) {
+  return {
+    matched: sortFavoritesOnTop(matched),
+    related: sortFavoritesOnTop(related),
+    suggested: sortFavoritesOnTop(suggested),
+  };
+}
+
+function sortFavoritesOnTop(emasciis) {
+  return emasciis.sort((a, b) => getFavorite(b.name) - getFavorite(a.name));
 }
