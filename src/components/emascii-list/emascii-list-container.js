@@ -1,16 +1,16 @@
 import { compose, withStateHandlers, withProps, withPropsOnChange } from "recompose";
 
-import { getRelated } from "../utils/datamuse";
-import { shuffledEmasciiNames, nameToEmascii } from "../utils/emasciis";
+import { getRelated } from "../../utils/datamuse";
+import { shuffledEmasciiNames, nameToEmascii } from "../../utils/emasciis";
 import {
   getFuzzyNameMatches,
   getWesternEmojiMatches,
   getRelatedWordsMatches
-} from "../utils/match";
-import suggest from "../utils/suggest";
-import {getFavorite} from '../utils/favorites-storage';
+} from "../../utils/match";
+import suggest from "../../utils/suggest";
+import {getFavorite} from '../../utils/favorites-storage';
 
-import EmasciiList from "./EmasciiList";
+import EmasciiList from "./emascii-list";
 
 const EmasciiListContainer = compose(
   withRelatedWords(),

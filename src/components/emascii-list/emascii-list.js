@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { media } from '../utils/style';
+import { media } from '../../utils/style';
 
-import Emascii from '../Emascii';
+import Emascii from '../emascii';
 
 const List = styled.div`
   width: 74%;

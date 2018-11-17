@@ -7,7 +7,7 @@ import {
 } from 'recompose';
 import styled, { keyframes } from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import {setFavorite, getFavorite, removeFavorite} from './utils/favorites-storage';
+import {setFavorite, getFavorite, removeFavorite} from '../../utils/favorites-storage';
 
 const animationDuration = 0.5;
 
