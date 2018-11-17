@@ -7,16 +7,16 @@ function suggest(text) {
   const suggestions = [
     {
       name: `flip ${text}`,
-      emascii: `(╯°□°)╯︵ ${flipped}`,
+      emascii: `(╯°□°)╯︵ ${flipped}`
     },
     {
       name: `rage flip ${text}`,
-      emascii: `(ノಠ益ಠ)ノ彡 ${flipped}`,
+      emascii: `(ノಠ益ಠ)ノ彡 ${flipped}`
     },
     {
       name: `unflip ${text}`,
-      emascii: `${text} ノ(ò_óノ)`,
-    },
+      emascii: `${text} ノ(ò_óノ)`
+    }
   ];
   return suggestions;
 }

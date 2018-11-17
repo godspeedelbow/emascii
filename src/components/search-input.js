@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Input = styled.input`
   border: none;
@@ -12,20 +12,23 @@ const Input = styled.input`
   max-width: 220px;
 `;
 
-class SearchInput extends Component{
+class SearchInput extends Component {
   constructor(props = { onChange: console.log }) {
     super(props);
   }
-  componentDidMount(){
+  componentDidMount() {
     this.inputComponent.focus();
   }
   render() {
-    return(
-        <Input autoCapitalize="none"
-          placeholder={'search'}
-          onChange={(event) => this.props.onChange(event.target.value)}
-          innerRef={(input) => { this.inputComponent = input; }}
-        />
+    return (
+      <Input
+        autoCapitalize="none"
+        placeholder={"search"}
+        onChange={event => this.props.onChange(event.target.value)}
+        innerRef={input => {
+          this.inputComponent = input;
+        }}
+      />
     );
   }
 }

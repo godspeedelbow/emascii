@@ -1,3 +1,3 @@
-const escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+const escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
 
 export default escape;

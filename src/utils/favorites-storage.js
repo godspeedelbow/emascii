@@ -1,6 +1,6 @@
-import {setObject, getObject} from './local-storage';
+import { setObject, getObject } from "./local-storage";
 
-const FAVORITES_KEY = 'EMASCII_FAVORITES'
+const FAVORITES_KEY = "EMASCII_FAVORITES";
 const favorites = getObject(FAVORITES_KEY) || {};
 
 export function getFavorite(name) {

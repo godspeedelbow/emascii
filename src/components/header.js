@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import SearchInput from './search-input';
+import SearchInput from "./search-input";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Title = styled.h1`
   margin-bottom: 0;

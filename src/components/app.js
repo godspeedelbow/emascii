@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 
-import EmasciiList from './emascii-list';
-import Header from './header';
+import EmasciiList from "./emascii-list";
+import Header from "./header";
 
 const Centered = styled.div`
   text-align: center;
@@ -15,7 +15,7 @@ const Footer = styled.div`
 `;
 
 const Link = styled.a`
-	color: lawngreen;
+  color: lawngreen;
   text-decoration: none;
 
   &:hover {
@@ -27,7 +27,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
+      search: ""
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -41,7 +41,8 @@ class App extends Component {
       <Centered>
         <Header onChange={this.onChange} />
         <EmasciiList search={search} />
-        <Footer>created by @godspeedelbow:&nbsp;
+        <Footer>
+          created by @godspeedelbow:&nbsp;
           <Link href="https://github.com/godspeedelbow">github</Link>
           &nbsp;/&nbsp;
           <Link href="https://twitter.com/godspeedelbow">twitter</Link>
